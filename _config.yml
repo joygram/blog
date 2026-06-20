@@ -1,0 +1,12 @@
+title: lovbible 블로그
+description: 바이브코딩·앱자동화·챗GPT 활용 — 메이커의 기록
+baseurl: "/blog"
+url: "https://joygram.github.io"
+theme: minima
+
+permalink: /:categories/:year/:month/:day/:title.html
+
+# DeukBlogger 자동 발행 대상 저장소.
+# 글은 _posts/ 에 YYYY-MM-DD-slug.md (Jekyll 프론트매터) 형식으로 push 된다.
+plugins:
+  - jekyll-feed
