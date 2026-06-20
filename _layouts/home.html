@@ -1,0 +1,30 @@
+---
+layout: default
+---
+
+<div class="home">
+  {{ content }}
+
+  <section class="category-cards">
+    {% for cat in site.categories_nav %}
+      {% assign posts_in_cat = site.categories[cat.slug] %}
+      <a class="category-card" href="{{ '/categories/' | append: cat.slug | append: '/' | relative_url }}">
+        <span class="cat-name">{{ cat.name }}</span>
+        <span class="cat-count">{{ posts_in_cat | size }}편</span>
+      </a>
+    {% endfor %}
+  </section>
+
+  <h2 class="section-title">최근 글</h2>
+  <ul class="post-list">
+    {% for post in site.posts limit:10 %}
+      <li class="post-item">
+        <span class="post-meta">{{ post.date | date: "%Y.%m.%d" }}</span>
+        <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+        {% if post.categories.first %}
+          <span class="post-cat">{{ post.categories.first }}</span>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</div>

@@ -10,3 +10,19 @@ permalink: /:categories/:year/:month/:day/:title.html
 # 글은 _posts/ 에 YYYY-MM-DD-slug.md (Jekyll 프론트매터) 형식으로 push 된다.
 plugins:
   - jekyll-feed
+
+# 블로그 카테고리 네비게이션 — 통상 블로그식 분류.
+# slug 는 글 frontmatter 의 categories 값과 일치해야 한다.
+categories_nav:
+  - { slug: vibe-coding,    name: 바이브코딩 }
+  - { slug: app-automation, name: 앱자동화 }
+  - { slug: chatgpt-usage,  name: 챗지피티활용 }
+  - { slug: ai-coding,      name: AI코딩 }
+  - { slug: adhd,           name: ADHD생산성 }
+  - { slug: education,      name: 교육 }
+  - { slug: health,         name: 건강 }
+  - { slug: realestate,     name: 부동산 }
+  - { slug: stock,          name: 주식 }
+
+minima:
+  skin: classic
