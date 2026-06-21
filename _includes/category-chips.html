@@ -1,0 +1,35 @@
+{%- comment -%}
+상단 카테고리 칩/Pill 가로 필터.
+검증된 패턴(딥리서치 037): 9개 카테고리 콘텐츠 블로그 → 사이드바 대신 상단 칩.
+자주 보는 N개(primary_count) 노출 + 나머지는 <details>로 더보기(JS 불필요, GitHub Pages 안전).
+{%- endcomment -%}
+{%- assign primary_count = 4 -%}
+
+<nav class="cat-chips" aria-label="카테고리">
+  <a class="chip {% if page.url == '/' %}chip--active{% endif %}" href="{{ '/' | relative_url }}">
+    전체 <span class="chip-count">{{ site.posts | size }}</span>
+  </a>
+  {%- for cat in site.categories_nav limit: primary_count -%}
+    {%- assign n = site.categories[cat.slug] | size -%}
+    <a class="chip {% if page.category == cat.slug %}chip--active{% endif %}"
+       href="{{ '/categories/' | append: cat.slug | append: '/' | relative_url }}">
+      {{ cat.name }}{% if n > 0 %} <span class="chip-count">{{ n }}</span>{% endif %}
+    </a>
+  {%- endfor -%}
+
+  {%- assign rest = site.categories_nav | size | minus: primary_count -%}
+  {%- if rest > 0 -%}
+    <details class="chip-more">
+      <summary class="chip chip--more">더보기 +{{ rest }}</summary>
+      <div class="chip-more-panel">
+        {%- for cat in site.categories_nav offset: primary_count -%}
+          {%- assign n = site.categories[cat.slug] | size -%}
+          <a class="chip {% if page.category == cat.slug %}chip--active{% endif %}"
+             href="{{ '/categories/' | append: cat.slug | append: '/' | relative_url }}">
+            {{ cat.name }}{% if n > 0 %} <span class="chip-count">{{ n }}</span>{% endif %}
+          </a>
+        {%- endfor -%}
+      </div>
+    </details>
+  {%- endif -%}
+</nav>

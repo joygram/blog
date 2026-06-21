@@ -6,13 +6,11 @@
   <body>
 
     {%- include header.html -%}
+    {%- include category-chips.html -%}
 
     <main class="page-content" aria-label="Content">
-      <div class="wrapper blog-shell">
-        {%- include sidebar.html -%}
-        <div class="blog-main">
-          {{ content }}
-        </div>
+      <div class="wrapper">
+        {{ content }}
       </div>
     </main>
 
