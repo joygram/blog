@@ -1,5 +1,5 @@
 ---
-# minima 기본 스타일 위에 통상 블로그 커스텀을 얹는다.
+# minima 기본 스타일 위에 티스토리/네이버식 사이드바 블로그 커스텀을 얹는다.
 ---
 
 @import "minima";
@@ -18,66 +18,76 @@
   margin-top: 12px;
 }
 .site-tagline {
-  margin: 2px 0 12px;
+  margin: 2px 0 14px;
   color: #888;
   font-size: 13px;
 }
 
-/* ── 카테고리 네비 ── */
-.category-nav {
+/* ── 2단 셸: [사이드바 | 본문] ── */
+.blog-shell {
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  padding: 8px 0;
-  border-top: 1px solid #f0f0f0;
-  float: none;
-  line-height: normal;
+  align-items: flex-start;
+  gap: 28px;
 }
-.category-nav .nav-link {
-  padding: 6px 12px;
-  border-radius: 16px;
-  font-size: 14px;
-  color: #555;
-  text-decoration: none;
-  transition: background .15s, color .15s;
+.site-sidebar {
+  flex: 0 0 200px;
+  position: sticky;
+  top: 20px;
 }
-.category-nav .nav-link:hover {
-  background: #f2f2f2;
-}
-.category-nav .nav-link.active {
-  background: #03c75a;
-  color: #fff;
+.blog-main {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
-/* ── 카테고리 카드(홈) ── */
-.category-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 12px;
-  margin: 24px 0;
-}
-.category-card {
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
+/* ── 사이드바 카테고리 트리 ── */
+.sidebar-inner {
   border: 1px solid #eaeaea;
   border-radius: 10px;
+  overflow: hidden;
+}
+.sidebar-title {
+  margin: 0;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  background: #03c75a;
+}
+.cat-tree { list-style: none; margin: 0; padding: 6px 0; }
+.cat-tree-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 16px;
+  color: #444;
   text-decoration: none;
-  color: #1a1a2e;
-  transition: box-shadow .15s, transform .15s;
+  font-size: 14px;
+  border-left: 3px solid transparent;
+  transition: background .12s, border-color .12s, color .12s;
 }
-.category-card:hover {
-  box-shadow: 0 4px 14px rgba(0,0,0,.08);
-  transform: translateY(-2px);
+.cat-tree-link:hover { background: #f5f7f6; }
+.cat-tree-link.active {
+  color: #03996f;
+  font-weight: 700;
+  background: #f0faf5;
+  border-left-color: #03c75a;
 }
-.category-card .cat-name { font-weight: 700; font-size: 15px; }
-.category-card .cat-count { color: #03c75a; font-size: 13px; margin-top: 4px; }
+.cat-tree-count {
+  font-size: 12px;
+  color: #aaa;
+  background: #f2f2f2;
+  border-radius: 10px;
+  padding: 1px 8px;
+  min-width: 20px;
+  text-align: center;
+}
+.cat-tree-link.active .cat-tree-count { color: #03996f; background: #d9f3e6; }
 
 /* ── 글 목록 ── */
 .section-title, .category-title {
   font-size: 20px;
   font-weight: 700;
-  margin: 28px 0 12px;
+  margin: 4px 0 12px;
   padding-bottom: 8px;
   border-bottom: 2px solid #1a1a2e;
 }
@@ -86,7 +96,7 @@
   display: flex;
   align-items: baseline;
   gap: 10px;
-  padding: 12px 4px;
+  padding: 13px 4px;
   border-bottom: 1px solid #f0f0f0;
 }
 .post-meta { color: #aaa; font-size: 13px; min-width: 84px; }
@@ -105,3 +115,9 @@
   border-radius: 10px;
 }
 .empty { color: #999; padding: 24px 0; }
+
+/* ── 반응형: 모바일은 사이드바를 본문 위로 ── */
+@media (max-width: 720px) {
+  .blog-shell { flex-direction: column; gap: 18px; }
+  .site-sidebar { position: static; flex-basis: auto; width: 100%; }
+}
